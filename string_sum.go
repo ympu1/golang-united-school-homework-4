@@ -29,14 +29,14 @@ var (
 func StringSum(input string) (output string, err error) {
 	input = strings.ReplaceAll(input, " ", "")
 	if input == "" {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("Bad input, empty string %w", errorEmptyInput)
 	}
 
 	re := regexp.MustCompile(`[+-]*[^+^-]+[+-]{1}`)
 	indexes := re.FindAllIndex([]byte(input), 2)
 
 	if len(indexes) != 1 {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("Bad input, wrong operands count: %w", errorNotTwoOperands)
 	}
 	index := indexes[0]
 
